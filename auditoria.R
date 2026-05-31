@@ -110,6 +110,3 @@ ggplot(datos,aes(IPI,colour = Certificacion,fill = Certificacion))+
   scale_color_met_d("Hokusai3") +
   scale_fill_met_d("Hokusai3")
 
-# Inconsistencias Lógicas -------------------------------------------------
-
-datos |> filter(Antiguedad > Edad)
