@@ -50,6 +50,16 @@ ggplot(datos, aes(Presupuesto,IPI))+
   geom_point()+
   geom_smooth(method = lm) #Valor atipico!
 
+
+# Presupuesto modificado --------------------------------------------------
+ggplot(datos, aes(log(Presupuesto)))+
+  geom_histogram(fill = met.brewer("Cross", type = "discrete")[4], color = "white")
+ggplot(datos, aes(log(Presupuesto),IPI))+
+  geom_point()+
+  geom_smooth(method = lm) #Valor atipico!
+
+
+
 # Distancia ---------------------------------------------------------------
 
 ggplot(datos, aes(Distancia))+
