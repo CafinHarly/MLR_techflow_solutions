@@ -18,37 +18,86 @@ glimpse(datos)
 #Departamento : Categórica
 #Certificación : Categórica
 
+
 # Antiguedad --------------------------------------------------------------
 
 ggplot(datos, aes(Antiguedad)) + 
-  geom_histogram(fill = met.brewer("Cross", type = "discrete")[1], color = "white")
+  geom_histogram(fill = met.brewer("Cross", type = "discrete")[1], color = "white")+
+  labs(
+    x = "Antiguedad",
+    y = "Frecuencia",
+    title = "Distribución de Antiguedad",
+    caption = "Variable en años"
+  )+
+  theme(plot.title = element_text(hjust = 0.5))
 ggplot(datos,aes(Antiguedad,IPI))+
   geom_point()+
-  geom_smooth(method = lm)
+  geom_smooth(method = lm)+
+  labs(
+    x = "Antiguedad",
+    y = "IPI",
+    title = "Antiguedad vs IPI")+
+  theme(plot.title = element_text(hjust = 0.5))
 
 # Horas -------------------------------------------------------------------
 
 ggplot(datos, aes(Horas))+
-  geom_histogram(fill = met.brewer("Cross", type = "discrete")[2], color = "white")
+  geom_histogram(fill = met.brewer("Cross", type = "discrete")[2], color = "white")+
+  labs(
+    x = "Horas",
+    y = "Frecuencia",
+    title = "Distribución de Horas",
+    caption = "Variable en horas"
+  )+
+  theme(plot.title = element_text(hjust = 0.5))
 ggplot(datos, aes(Horas,IPI))+
   geom_point()+
-  geom_smooth(method = lm)
+  geom_smooth(method = lm)+
+  labs(
+    x = "Horas",
+    y = "IPI",
+    title = "Horas vs IPI")+
+  theme(plot.title = element_text(hjust = 0.5))
 
 # Edad --------------------------------------------------------------------
 
 ggplot(datos, aes(Edad))+
-  geom_histogram(fill = met.brewer("Cross", type = "discrete")[3], color = "white")
+  geom_histogram(fill = met.brewer("Cross", type = "discrete")[3], color = "white")+
+  labs(
+    x = "Edad",
+    y = "Frecuencia",
+    title = "Distribución de Edad",
+    caption = "Variable en años"
+  )+
+  theme(plot.title = element_text(hjust = 0.5))
 ggplot(datos, aes(Edad,IPI))+
   geom_point()+
-  geom_smooth(method = lm)
+  geom_smooth(method = lm)+
+  labs(
+    x = "Edad",
+    y = "IPI",
+    title = "Edad vs IPI")+
+  theme(plot.title = element_text(hjust = 0.5))
 
 # Presupuesto -------------------------------------------------------------
 
 ggplot(datos, aes(Presupuesto))+
-  geom_histogram(fill = met.brewer("Cross", type = "discrete")[4], color = "white")
+  geom_histogram(fill = met.brewer("Cross", type = "discrete")[4], color = "white")+
+  labs(
+    x = "Presupuesto",
+    y = "Frecuencia",
+    title = "Distribución de Presupuesto",
+    caption = "Variable en dólares"
+  )+
+  theme(plot.title = element_text(hjust = 0.5))
 ggplot(datos, aes(Presupuesto,IPI))+
   geom_point()+
-  geom_smooth(method = lm) #Valor atipico!
+  geom_smooth(method = lm)+#Valor atipico!
+  labs(
+    x = "Presupuesto",
+    y = "IPI",
+    title = "Presupuesto vs IPI")+
+  theme(plot.title = element_text(hjust = 0.5))
 
 
 # Presupuesto modificado --------------------------------------------------
@@ -63,34 +112,84 @@ ggplot(datos, aes(log(Presupuesto),IPI))+
 # Distancia ---------------------------------------------------------------
 
 ggplot(datos, aes(Distancia))+
-  geom_histogram(fill = met.brewer("Cross", type = "discrete")[7], color = "white")
+  geom_histogram(fill = met.brewer("Cross", type = "discrete")[7], color = "white")+
+  labs(
+    x = "Distancia",
+    y = "Frecuencia",
+    title = "Distribución de Distancia",
+    caption = "Variable en kilometros"
+  )+
+  theme(plot.title = element_text(hjust = 0.5))
 ggplot(datos, aes(Distancia,IPI))+
   geom_point()+
-  geom_smooth(method = lm)
+  geom_smooth(method = lm)+
+  labs(
+    x = "Distancia",
+    y = "IPI",
+    title = "Distancia vs IPI")+
+  theme(plot.title = element_text(hjust = 0.5))
 
 # Satisfacción ------------------------------------------------------------
 ggplot(datos, aes(Satisfaccion_Clima))+
-  geom_histogram(fill = met.brewer("Cross", type = "discrete")[8], color = "white")
+  geom_histogram(fill = met.brewer("Cross", type = "discrete")[8], color = "white")+
+  labs(
+    x = "Satisfacción",
+    y = "Frecuencia",
+    title = "Distribución de Satisfacción",
+    caption = "Variable sin unidad"
+  )+
+  theme(plot.title = element_text(hjust = 0.5))
 ggplot(datos, aes(Satisfaccion_Clima,IPI))+
   geom_point()+
-  geom_smooth(method = lm)
+  geom_smooth(method = lm)+
+  labs(
+    x = "Satisfaccion",
+    y = "IPI",
+    title = "Satisfaccion vs IPI")+
+  theme(plot.title = element_text(hjust = 0.5))
 
 # Nivel -------------------------------------------------------------------
 ggplot(datos, aes(Nivel,fill=Nivel))+
-  geom_bar(color = "white")+
-  scale_fill_met_d("Cross")
-ggplot(datos, aes(Nivel,IPI))+
-  geom_boxplot()
+  geom_bar(color = "white",show.legend = FALSE)+
+  scale_fill_met_d("Cross")+
+  labs(
+    x = NULL,
+    y = "Frecuencia",
+    title = "Distribución de Nivel",
+  )+
+  theme(plot.title = element_text(hjust = 0.5))
+ggplot(datos, aes(Nivel,IPI , fill = Nivel))+
+  geom_boxplot(color = "black",show.legend = FALSE)+
+  scale_fill_met_d("Cross") +
+  labs(
+    x = NULL,
+    y = "IPI",
+    title = "Distribución de Nivel según IPI"
+  )+
+  theme(plot.title = element_text(hjust = 0.5))
 ggplot(datos,aes(IPI,colour = Nivel,fill = Nivel))+
   geom_density(linewidth = 0.75,alpha = 0.4) +
   scale_color_met_d("Cross") +
   scale_fill_met_d("Cross")
 # Modalidad ---------------------------------------------------------------
 ggplot(datos, aes(Modalidad,fill=Modalidad))+
-  geom_bar(color = "white")+
-  scale_fill_met_d("Juarez")
-ggplot(datos, aes(Modalidad,IPI))+
-  geom_boxplot()
+  geom_bar(color = "white",show.legend = FALSE)+
+  scale_fill_met_d("Juarez")+
+  labs(
+    x = NULL,
+    y = "Frecuencia",
+    title = "Distribución de Modalidad",
+  )+
+  theme(plot.title = element_text(hjust = 0.5))
+ggplot(datos, aes(Modalidad,IPI,fill=Modalidad))+
+  geom_boxplot(color = "black",show.legend = FALSE)+
+  scale_fill_met_d("Juarez")+
+  labs(
+    x = NULL,
+    y = "IPI",
+    title = "Distribución de Modalidad según IPI"
+  )+
+  theme(plot.title = element_text(hjust = 0.5))
 ggplot(datos,aes(IPI,colour = Modalidad,fill = Modalidad))+
   geom_density(linewidth = 0.75,alpha = 0.4) +
   scale_color_met_d("Juarez") +
@@ -99,10 +198,23 @@ ggplot(datos,aes(IPI,colour = Modalidad,fill = Modalidad))+
 # Departamento ------------------------------------------------------------
 
 ggplot(datos, aes(Departamento,fill=Departamento))+
-  geom_bar(color = "white")+
-  scale_fill_met_d("Archambault")
-ggplot(datos, aes(Departamento,IPI))+
-  geom_boxplot()
+  geom_bar(color = "white",show.legend = FALSE)+
+  scale_fill_met_d("Archambault")+
+  labs(
+    x = NULL,
+    y = "Frecuencia",
+    title = "Distribución de Departamento",
+  )+
+  theme(plot.title = element_text(hjust = 0.5))
+ggplot(datos, aes(Departamento,IPI,fill=Departamento))+
+  geom_boxplot(color = "black",show.legend = FALSE)+
+  scale_fill_met_d("Archambault")+
+  labs(
+    x = NULL,
+    y = "IPI",
+    title = "Distribución de Departamento según IPI"
+  )+
+  theme(plot.title = element_text(hjust = 0.5))
 ggplot(datos,aes(IPI,colour = Departamento,fill = Departamento))+
   geom_density(linewidth = 0.75,alpha = 0.2) +
   scale_color_met_d("Archambault") +
@@ -111,10 +223,23 @@ ggplot(datos,aes(IPI,colour = Departamento,fill = Departamento))+
 # Certificación -----------------------------------------------------------
 
 ggplot(datos, aes(Certificacion,fill=Certificacion))+
-  geom_bar(color = "white")+
-  scale_fill_met_d("Hokusai3")
-ggplot(datos, aes(Certificacion,IPI))+
-  geom_boxplot()
+  geom_bar(color = "white",show.legend = FALSE)+
+  scale_fill_met_d("Hokusai3")+
+  labs(
+    x = NULL,
+    y = "Frecuencia",
+    title = "Distribución de Certificacion",
+  )+
+  theme(plot.title = element_text(hjust = 0.5))
+ggplot(datos, aes(Certificacion,IPI,fill=Certificacion))+
+  geom_boxplot(color = "black",show.legend = FALSE)+
+  scale_fill_met_d("Hokusai3")+
+  labs(
+    x = NULL,
+    y = "IPI",
+    title = "Distribución de Certificacion según IPI"
+  )+
+  theme(plot.title = element_text(hjust = 0.5))
 ggplot(datos,aes(IPI,colour = Certificacion,fill = Certificacion))+
   geom_density(linewidth = 0.75,alpha = 0.2) +
   scale_color_met_d("Hokusai3") +

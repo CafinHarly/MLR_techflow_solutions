@@ -1,6 +1,3 @@
-
-# Libraries ---------------------------------------------------------------
-library(readxl);library(tidyverse);library(nortest);library(GGally);library(olsrr);library(car);library(lmtest);library(PerformanceAnalytics); library(MASS)
 bestSubset <- function(modelo_completo) {
   todos <- ols_step_all_possible(modelo_completo)$result
   df <- as.data.frame(todos)
@@ -71,36 +68,3 @@ bestSubset <- function(modelo_completo) {
   
   return(modelo_lm_final)
 }
-datos <- read_xlsx("Trabajo.xlsx")
-
-# Preparacion de datos ----------------------------------------------------
-datos$Nivel <- factor(datos$Nivel, levels = c("Tecnico", "Grado", "Postgrado"))
-datos$Departamento <- factor(datos$Departamento)
-datos$Certificacion <- factor(datos$Certificacion)
-datos$Modalidad <- factor(datos$Modalidad)
-datos$Presupuesto <- log(datos$Presupuesto)
-
-modelo_og <- lm(IPI ~ ., data=datos)
-modelo0 <- lm(IPI ~ 1, data=datos)
-summary(modelo_og)
-
-# Selección de variables --------------------------------------------------
-
-bestSubset(modelo_og)
-
-step(modelo_og, direction = "backward", trace = F)
-step(modelo0, direction = "forward", scope = formula(modelo_og), trace = F)
-step(modelo0, direction = "both", scope = formula(modelo_og), trace = F)
-modeloSeleccion <- lm(formula = IPI ~ Presupuesto + Antiguedad + Nivel + Horas + Modalidad + Certificacion + Satisfaccion_Clima, data = datos)
-
-
-# Transformación ----------------------------------------------------------
-
-bc <- boxCox(modeloSeleccion, lambda = seq(-2,2,by=0.1))
-lambda <- bc$x[which.max(bc$y)]
-ylambda <- (datos$IPI^lambda - 1)/lambda
-ybc <- lm(ylambda ~ Presupuesto + Antiguedad + Nivel + Horas + Modalidad + Certificacion + Satisfaccion_Clima, data = datos)
-ad.test(ybc$residuals)
-
-modeloRaiz <- lm(sqrt(IPI) ~ Presupuesto + Antiguedad + Nivel + Horas + Modalidad + Certificacion + Satisfaccion_Clima, data = datos )
-ad.test(modeloRaiz$residuals)
